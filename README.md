@@ -33,3 +33,54 @@ Um sistema acadêmico moderno, elegante e responsivo para gestão e acompanhamen
 ---
 
 ## Estrutura do Projeto
+
+---
+
+## Configuração do Banco de Dados (Supabase)
+
+Execute o script SQL abaixo no **SQL Editor** do seu projeto no Supabase para criar a tabela e configurar as políticas de acesso:
+
+```sql
+CREATE TABLE IF NOT EXISTS public.atividades (
+  id UUID PRIMARY KEY DEFAULT gen_random_uuid(),
+  titulo TEXT NOT NULL,
+  disciplina TEXT NOT NULL,
+  descricao TEXT NOT NULL,
+  prazo DATE NOT NULL,
+  status BOOLEAN NOT NULL DEFAULT FALSE,
+  created_at TIMESTAMPTZ NOT NULL DEFAULT NOW()
+);
+
+ALTER TABLE public.atividades ENABLE ROW LEVEL SECURITY;
+
+CREATE POLICY "Permitir SELECT anon"
+ON public.atividades
+FOR SELECT
+TO anon
+USING (true);
+
+CREATE POLICY "Permitir INSERT anon"
+ON public.atividades
+FOR INSERT
+TO anon
+WITH CHECK (true);
+
+CREATE POLICY "Permitir UPDATE anon"
+ON public.atividades
+FOR UPDATE
+TO anon
+USING (true)
+WITH CHECK (true);
+
+CREATE POLICY "Permitir DELETE anon"
+ON public.atividades
+FOR DELETE
+TO anon
+USING (true);
+
+:root {
+  --primary: #4F46E5;
+  --success: #16A34A;
+  --warning: #F59E0B;
+  --danger: #EF4444;
+}
