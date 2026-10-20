@@ -78,9 +78,3 @@ FOR DELETE
 TO anon
 USING (true);
 
-:root {
-  --primary: #4F46E5;
-  --success: #16A34A;
-  --warning: #F59E0B;
-  --danger: #EF4444;
-}
