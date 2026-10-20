@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>SAGA</title>
+    <meta name="description" content="Sistema acadêmico de gestão de atividades." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/butterpop@1.0.4/butterpop.min.css" />
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <div class="app-shell" id="appShell">
+      <aside class="sidebar" id="sidebar" aria-label="Navegação principal">
+        <div class="brand-block">
+          <div class="brand-mark">S</div>
+          <div>
+            <p class="brand-label">Sistema Acadêmico</p>
+            <h2>SAGA</h2>
+          </div>
+        </div>
+
+        <nav class="sidebar-nav" aria-label="Menu principal">
+          <button class="nav-link active" type="button" data-module="dashboard">
+            <span>Dashboard</span>
+          </button>
+          <button class="nav-link" type="button" data-module="activities">
+            <span>Atividades</span>
+          </button>
+          <button class="nav-link" type="button" data-module="historico">
+            <span>Histórico</span>
+          </button>
+        </nav>
+      </aside>
+
+      <div class="sidebar-backdrop" id="sidebarBackdrop"></div>
+
+      <main class="main-panel">
+        <header class="topbar">
+          <div class="topbar-left">
+            <button id="menuToggle" class="menu-toggle" type="button" aria-label="Abrir menu">
+              <span></span>
+              <span></span>
+              <span></span>
+            </button>
+            <div>
+              <p class="eyebrow">Painel acadêmico</p>
+              <h1>Gestão de atividades</h1>
+            </div>
+          </div>
+        </header>
+
+        <section id="dashboardView" class="view active" aria-label="Dashboard">
+          <div class="welcome-card">
+            <p class="eyebrow">Bem-vindo</p>
+            <h2>Visão geral da semana</h2>
+          </div>
+
+          <div class="stats-grid">
+            <article class="stat-card stat-total">
+              <span class="stat-label">Total</span>
+              <strong id="dashboardTotal">0</strong>
+            </article>
+            <article class="stat-card stat-pending">
+              <span class="stat-label">Pendentes</span>
+              <strong id="dashboardPending">0</strong>
+            </article>
+            <article class="stat-card stat-done">
+              <span class="stat-label">Concluídas</span>
+              <strong id="dashboardDone">0</strong>
+            </article>
+          </div>
+        </section>
+
+        <section id="activitiesView" class="view" aria-label="Atividades pendentes">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">Módulo</p>
+              <h2>Atividades</h2>
+            </div>
+            <button id="openModalBtn" class="primary-btn" type="button">+ Nova atividade</button>
+          </div>
+
+          <div id="activitiesList" class="activities-list" aria-live="polite"></div>
+        </section>
+
+        <section id="historicoView" class="view" aria-label="Histórico de atividades concluídas">
+          <div class="panel-header">
+            <div>
+              <p class="eyebrow">Registro</p>
+              <h2>Histórico</h2>
+            </div>
+          </div>
+
+          <div class="history-toolbar">
+            <label class="field search-field">
+              <span>Buscar</span>
+              <input id="historicoSearch" type="text" placeholder="Filtrar por título ou disciplina" />
+            </label>
+
+            <label class="field date-field">
+              <span>Data</span>
+              <input id="historicoDate" type="date" />
+            </label>
+          </div>
+
+          <div id="historicoList" class="activities-list" aria-live="polite"></div>
+        </section>
+      </main>
+    </div>
+
+    <div id="activityModal" class="modal hidden" aria-hidden="true">
+      <div class="modal-backdrop" data-close="true"></div>
+      <div class="modal-dialog" role="dialog" aria-modal="true" aria-labelledby="modalTitle">
+        <div class="modal-header">
+          <h2 id="modalTitle">Nova atividade</h2>
+          <button type="button" class="icon-btn" id="closeModalBtn" aria-label="Fechar modal">×</button>
+        </div>
+
+        <form id="activityForm" novalidate>
+          <div class="form-grid">
+            <label class="field">
+              <span>Título</span>
+              <input id="titulo" name="titulo" type="text" maxlength="100" required placeholder="Ex.: Trabalho de Matemática" />
+            </label>
+
+            <label class="field">
+              <span>Disciplina</span>
+              <input id="disciplina" name="disciplina" type="text" maxlength="80" required placeholder="Ex.: Cálculo I" />
+            </label>
+
+            <label class="field field-full">
+              <span>Descrição</span>
+              <textarea id="descricao" name="descricao" rows="4" maxlength="500" required placeholder="Descreva a atividade ou entrega solicitada."></textarea>
+            </label>
+
+            <label class="field">
+              <span>Prazo</span>
+              <input id="prazo" name="prazo" type="date" required />
+            </label>
+          </div>
+
+          <div class="form-actions">
+            <button type="button" class="secondary-btn" id="cancelBtn">Cancelar</button>
+            <button type="submit" class="primary-btn" id="submitBtn">Salvar atividade</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="https://cdn.jsdelivr.net/npm/butterpop@1.0.4/butterpop.min.js"></script>
+    <script type="module" src="./app.js"></script>
+  </body>
+</html>
