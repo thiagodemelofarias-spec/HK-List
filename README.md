@@ -32,10 +32,6 @@ Um sistema acadêmico moderno, elegante e responsivo para gestão e acompanhamen
 
 ---
 
-## Estrutura do Projeto
-
----
-
 ## Configuração do Banco de Dados (Supabase)
 
 Execute o script SQL abaixo no **SQL Editor** do seu projeto no Supabase para criar a tabela e configurar as políticas de acesso:
